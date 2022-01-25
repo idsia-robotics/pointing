@@ -20,7 +20,7 @@ The system has been tested with different robotic platforms
 based on a number of different useful interaction patterns.
 </details>
 
-[PDF](files/gromov2016wearable.pdf)
+[PDF](/files/gromov2016wearable.pdf)
 https://youtu.be/FWMCxARQYhY
 
 
