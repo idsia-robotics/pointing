@@ -80,6 +80,7 @@ unit (IMU), and, crucially, on the operator’s own perception.
 We experimentally show the feasibility of our approach using
 real-world robots.
 </details>
+
 [PDF](/files/gromov2018robot.pdf) [Video](https://www.youtube.com/watch?v=VaQ3aZBf_uE&ab_channel=BorisGromov)
 
 details: motion-relloc/index.html
@@ -92,6 +93,7 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
   <summary>Abstract</summary>
  We demonstrate a system to control robots in the users proximity with pointing gestures-a natural device that people use all the time to communicate with each other. Our setup consists of a miniature quadrotor Crazyflie 2.0, a wearable inertial measurement unit MetaWearR+ mounted on the user's wrist, and a laptop as the ground control station.
 </details>
+
 [PDF](/files/gromov2019demo.pdf) [Video](https://youtu.be/yafy-HZMk_U)
 award img/gromov2019demo-award.jpg
 
@@ -127,6 +129,7 @@ We report different experiments with real robots and untrained
 users, validating the individual components and the system as
 a whole.
 </details>
+
 [PDF](/files/gromov2019proximity.pdf) [Video](https://youtu.be/hyh_5A4RXZY)
 
 ### Guiding Quadrotor Landing with Pointing Gestures
@@ -144,6 +147,7 @@ real time: such feedback has a fundamental role in mitigating sensing inaccuraci
 our approach compares well with a standard joystick-based controller in
 terms of intuitiveness (amount of training required), landing spot accuracy, and efficiency
 </details>
+
 [PDF](/files/gromov2020guiding.pdf)
 
 ### Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures
@@ -163,6 +167,7 @@ subjects show that the approach performs well on a challenging
 3D piloting task, where it compares favorably with joystick
 control.
 </details>
+
 [PDF](/files/gromov2020intuitive.pdf) [Video](https://youtu.be/9PeCe9AVh-4)
 details: 3d-pointing/index.html
 
@@ -175,6 +180,7 @@ _in 2021 IEEE International Conference on Robotics and Automation (ICRA), pp. 36
   <summary>Abstract</summary>
  We propose a practical approach for detecting the event that a human wearing an IMU-equipped bracelet points at a moving robot; the approach uses a learned classifier to verify if the robot motion (as measured by its odometry) matches the wrist motion, and does not require that the relative pose of the operator and robot is known in advance. To train the model and validate the system, we collect datasets containing hundreds of real-world pointing events. Extensive experiments quantify the performance of the classifiers and relevant metrics of the resulting detectors; the approach is implemented in a real-world demonstrator that allows users to land quadrotors by pointing at them.
 </details>
+
 [PDF](abbate2021moving.pdf) [Video](https://www.youtube.com/watch?v=x7Xt7Xr7pWk&ab_channel=BorisGromov)
 
 ### IMU-based pointing for package selection on industrial conveyor belts
@@ -185,6 +191,7 @@ Gabriele Abbate, Alessandro Giusti, Antonio Paolillo, Luca Maria Gambardella, An
   <summary>Abstract</summary>
 We introduce an intuitive pointing-based interface to select objects moving on a system of conveyor belts. The interface has minimal sensing requirements, as the operator only needs to wear an Inertial Measurement Unit on the wrist (e.g., a smartwatch). LED strips provide the required visual feedback to precisely point to the objects and select them. We experimentally compare the proposed approach with a baseline mouse-based graphical user interface in which the user can click on packages with a mouse. Quantitative results show that our interface compares favorably to the baseline, especially in difficult scenarios involving many packages moving fast.
 </details>
+
 https://github.com/idsia-robotics/pointing-belts
 https://www.youtube.com/watch?v=hB33cX6pvmg&ab_channel=GabrieleAbbate
 
@@ -196,6 +203,7 @@ https://github.com/Gabry993/pointing-user-interface-hri
 <details>
   <summary>Abstract</summary>
 </details>
+
 ### HRI Demo Jerome
 <details>
   <summary>Abstract</summary>
