@@ -37,6 +37,7 @@ We quantitatively evaluate the resulting detection accuracy,
 and discuss an application to a human-robot interaction task
 where pointing gestures are used to guide a quadrotor landing
 </details>
+
 [PDF](/files/broggini2018learning.pdf)
 
 ### Video: Landing a Drone with Pointing Gestures
