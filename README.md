@@ -2,6 +2,8 @@
 {% include youtubePlayer.html id="FWMCxARQYhY" %}
 ## Publications
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FWMCxARQYhY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 ### Wearable multi-modal interface for human multi-robot interaction
 
  B. Gromov, L. M. Gambardella, and G. A. Di Caro
