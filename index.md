@@ -46,7 +46,7 @@ _in 2021 IEEE International Conference on Robotics and Automation (ICRA), pp. 36
  We propose a practical approach for detecting the event that a human wearing an IMU-equipped bracelet points at a moving robot; the approach uses a learned classifier to verify if the robot motion (as measured by its odometry) matches the wrist motion, and does not require that the relative pose of the operator and robot is known in advance. To train the model and validate the system, we collect datasets containing hundreds of real-world pointing events. Extensive experiments quantify the performance of the classifiers and relevant metrics of the resulting detectors; the approach is implemented in a real-world demonstrator that allows users to land quadrotors by pointing at them.
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/abbate2021moving.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/abbate2021moving.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x7Xt7Xr7pWk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -71,7 +71,7 @@ subjects show that the approach performs well on a challenging
 control.
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2020intuitive.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2020intuitive.pdf)
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9PeCe9AVh-4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
@@ -96,7 +96,7 @@ our approach compares well with a standard joystick-based controller in
 terms of intuitiveness (amount of training required), landing spot accuracy, and efficiency
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2020guiding.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2020guiding.pdf)
 
 ---
 
@@ -123,7 +123,7 @@ users, validating the individual components and the system as
 a whole.
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2019proximity.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2019proximity.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hyh_5A4RXZY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -148,7 +148,7 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
  We demonstrate a system to control robots in the users proximity with pointing gestures-a natural device that people use all the time to communicate with each other. Our setup consists of a miniature quadrotor Crazyflie 2.0, a wearable inertial measurement unit MetaWearR+ mounted on the user's wrist, and a laptop as the ground control station.
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2019demo.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2019demo.pdf)
 
 award img/gromov2019demo-award.jpg
 
@@ -180,7 +180,7 @@ We experimentally show the feasibility of our approach using
 real-world robots.
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2018robot.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2018robot.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VaQ3aZBf_uE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -203,7 +203,7 @@ traditional joystick interface.
 </details>
 
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2018video.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2018video.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jpG8Jsmth2Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
@@ -226,7 +226,7 @@ and discuss an application to a human-robot interaction task
 where pointing gestures are used to guide a quadrotor landing
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/broggini2018learning.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/broggini2018learning.pdf)
 
 ---
 
@@ -249,7 +249,7 @@ The system has been tested with different robotic platforms
 based on a number of different useful interaction patterns.
 </details>
 
-[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2016wearable.pdf)
+[![PDF](/files/img/pdf1.png "Download Paper")](/files/gromov2016wearable.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FWMCxARQYhY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
