@@ -1,5 +1,7 @@
 # Pointing
 
+![Expression]({{ "/files/img/pdf1.png" | relative_url }})
+
 ## Publications
 
 ### HRI Demo Jerome
