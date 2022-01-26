@@ -1,53 +1,7 @@
 # Pointing
-{% include youtubePlayer.html id="FWMCxARQYhY" %}
+
 ## Publications
- <div id="video-carousel-example2" class="carousel slide carousel-fade" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#video-carousel-example2" data-slide-to="0" class="active"></li>
-      <li data-target="#video-carousel-example2" data-slide-to="1"></li>
-      <li data-target="#video-carousel-example2" data-slide-to="2"></li>
-    </ol>
-    <!--Slides-->
-    <div class="carousel-inner" role="listbox">
-    <!-- First slide -->
-    <div class="carousel-item active">
-    <div class="view">
-    <video class="video-fluid" autoplay loop muted>
-      <source src="https://khaalipaper.com/video/dummy.mp4" type="video/mp4" />
-    </video>
-    <div class="mask rgba-indigo-light"></div>
-    </div>
-    <div class="carousel-caption">
-    <div class="animated fadeInDown">
-    <h3 class="h3-responsive">Video 1</h3>
-    </div>
-    </div>
-    </div>
-    <div class="carousel-item">
-    <div class="view">
-    <video class="video-fluid" autoplay loop muted>
-    <source src="https://khaalipaper.com/video/dummy1.mp4" type="video/mp4" />
-    </video>
-    <div class="mask rgba-purple-slight"></div>
-    </div>
-    <div class="carousel-caption">
-    <div class="animated fadeInDown">
-    <h3 class="h3-responsive">Video 2</h3>
-    </div>
-    </div>
-    </div>
-    </div>
-    <!--Controls-->
-    <a class="carousel-control-prev" href="#video-carousel-example2" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#video-carousel-example2" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-    <!--Controls-->
-  </div>
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FWMCxARQYhY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Wearable multi-modal interface for human multi-robot interaction
