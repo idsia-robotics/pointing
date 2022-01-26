@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107954235-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107954235-1');
+
+      var outbound_link = function(url) {
+        ga('gtag_UA_107954235_1.send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function(){document.location = url;}
+        });
+      }
+	</script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/javascript" src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js">
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Proximity HRI Using Pointing Gestures and a Wrist-mounted IMU</title>
+    <meta name="description" content="Personal page of Boris Gromov
+">
+
+    <link rel="stylesheet" href="/~gromov/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/~gromov/css/main.css">
+    <link rel="stylesheet" href="/~gromov/css/csl-blocks.css">
+    <link rel="canonical" href="http://people.idsia.ch/~gromov/proximity-hri-pipeline/">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+
+    <link rel="stylesheet" href="/~gromov/css/flickity.css">
+
+    <script type="text/javascript">
+        window.onload = setupFlickity;
+
+        function setupFlickity() {
+            var carousel = document.querySelectorAll(".carousel")
+
+            carousel.forEach(function(elem, i) {
+                var flkty = new Flickity(elem, {
+                    on: {
+                        ready: function() {
+                            var flkty = Flickity.data(elem)
+
+                            flkty.cells.forEach(function(cell, i) {
+                                if (cell.element == flkty.selectedElement) {
+                                    var video = cell.element.querySelector("video");
+                                    if (video) {
+                                        console.log("Starting active video");
+                                        video.play();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                flkty.on("change", function() {
+                  // console.log("Flickity active slide: " + flkty.selectedIndex);
+
+                  flkty.cells.forEach(function(cell, i) {
+                    if (cell.element == flkty.selectedElement) {
+                      // play video if active slide contains one
+                      // use <video playsinline ..> in your html to assure it works on ios devices
+                      var video = cell.element.querySelector("video");
+                      if (video) {
+                        // console.log("Restarting video " + i);
+                        video.load();
+                        video.play();
+                      }
+                      return;
+                    }
+
+                    // pause all other videos
+                    var video = cell.element.querySelector("video");
+                    if (video) {
+                      // console.log("pausing video " + i);
+                      video.pause();
+                    }
+                  });
+                });
+
+            });
+        }
+    </script>
+</head>
+
+
+  <body>
+    
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+          <header class="post-header">
+            <h1 class="post-title">Proximity HRI Using Pointing Gestures and a Wrist-mounted IMU</h1>
+            <h5 class="post-description"></h5>
+          </header>
+
+          <article class="post-content">
+            <!-- <i>This page contains supplementary information for our demo proposal at AAAI 2019 conference.</i> -->
+
+<p>We demonstrate a complete implementation of a human-robot interaction pipeline that uses pointing gestures acquired with an inexpensive wrist-mounted IMU. Our approach allows to <em>localize</em>, <em>identify</em>, <em>select</em>, and <em>guide</em> a robot in the direct line of sight of the operator by a simple pointing gesture.</p>
+
+<p>The interaction starts when the operator points at and keeps following the moving robot for a few seconds. During that time we estimate the coordinate frame transformation between the operator and the robot. After that the operator can guide the robot in their vicinity by pointing at desired locations on the ground.</p>
+
+<p>The core of the system is based on our recently published <a href="/~gromov/motion-relloc/">localization method</a>. It allows to establish a transformation between the reference frames of a moving robot and the operator who continuously points at it. For this, we synchronize each pointing ray expressed in operator’s reference frame with the robot’s current position expressed in its odometry frame. These synchronized pairs are then supplied to a simple optimization procedure that finds the coordinate transformation between the operator and the robot (Figure 1, right).</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/hyh_5A4RXZY" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>The performance of the interface crucially relies on operator’s perception. Due to simplifications in the pointing model that we use and various sensory errors, the estimated frame transformations are <em>expected</em> to be imprecise. We provide live feedback during the entire course of interaction to deal with this problem. The operator in this case can timely adapt to any misalignments.</p>
+
+<p>When dealing with fast moving robots, such as quadrotors, the live feedback is naturally provided by the robot’s own body. Contrary, using the same method for slow (ground) robots can be very inefficient. We suggest to use a simple pan-tilt laser turret on top of such robots. The turret shines the laser on the ground at known coordinates and the operator points at it instead of the robot itself.</p>
+
+<div class="center">
+	<img style="width: 95%" src="img/overview.jpg" />
+	<figcaption>
+		<b>Fig&nbsp;1</b>: <i>Left:</i> First person view of the operator guiding quadrotor (Parrot Bebop&nbsp;2) to the target location using a pointing gesture. <i>Center:</i> Interaction with the ground robot (TurtleBot&nbsp;2) equipped with a pan-tilt laser turret. <i>Right:</i> Using wearable sensors we reconstruct the arm posture and find a pointing ray \( r_i \). We put these rays in correspondence with positions of the robot \( P_i \) to perform the relative localization (see&nbsp;<a href="#gromov2018robot">[1]</a> for details).
+	</figcaption>
+</div>
+
+<h4 id="experiments">Experiments</h4>
+
+<p>In this work we experimentally show the viability of our approach.</p>
+
+<h4 id="visual-feedback">Visual feedback</h4>
+
+<p>We first study the influence of availability of visual feedback on pointing accuracy using the proposed pointing interface. For this, we asked subjects to sequentially point at several targets on the floor in front of them. First, no additional visual feedback is provided and they have to rely solely on their perception (such as in natural setting). Second, the visual feedback is given in the form of a laser dot, that is projected at the location of <em>reconstructed</em> pointing location, i.e. the location where the system <em>thinks</em> the user have pointed at.</p>
+
+<div class="center">
+	<img style="width: 95%" src="img/with_without_mean.jpg" />
+	<figcaption>
+		<b>Fig&nbsp;2</b>: Effects of real-time visual feedback on pointing accuracy. <i>Left:</i> without visual feedback. <i>Center:</i> with visual feedback. <i>Right:</i> evolution in time of the distance from a pointed location to the target.
+	</figcaption>
+</div>
+
+<p>The data (Figure 2) shows that, without feedback, users quickly reach an average distance from the target of 0.5 m but do not improve any further; this is expected as the system has intrinsic inaccuracies (for example in the reconstruction of pointing rays \( r_i \) ) which the user is unable to see and correct. When the feedback is provided, distance decreases to almost 0 within 5 seconds.</p>
+
+<p>This demonstrates that real-time feedback—provided with a laser or with the robot’s own position—is a key component in our approach.</p>
+
+<h4 id="joystick-vs-pointing">Joystick vs. Pointing</h4>
+
+<p>In the next experiment we quantify and compare the performance of operators in a point-to-goal task using a conventional joystick (Logitech F710) and the proposed pointing interface. The task consists in guiding a quadrotor through a random sequence of five static waypoints (Figure 3).</p>
+
+<div class="center">
+	<img style="width: 50%" src="img/waypoints.jpg" />
+	<figcaption>
+		<b>Fig&nbsp;3</b>: The map of the experimental environment with targets (<i>blue circles</i>), their confirmations zones (<i>green circles</i>), the actual quadrotor trajectory in one of the pointing experiments (<i>colored curves</i>), and human ground truth position. The silhouettes of the quadrotor and user are depicted in the appropriate scale.
+	</figcaption>
+</div>
+
+<p>The waypoints change their color to guide the operator through the experimental sequence.</p>
+
+<div class="center">
+	<img style="width: 95%" src="img/waypoints_results.jpg" />
+	<figcaption>
+		<b>Fig&nbsp;4</b>: Waypoints experiment: Analysis of the evolution in time of the distance to the target, for each trajectory flown; each trajectory is represented as a line; \( t = 0 \) on the plot corresponds to the \( t_0 \) time of each trajectory. <i>Left:</i> joystick interface (\( N = 20 \)). <i>Center:</i> pointing interface (\( N = 20 \)). <i>Right:</i> average over all trajectories for each interface.
+	</figcaption>
+</div>
+
+<p>The code and datasets to reproduce the results presented in this work can be found <a href="/~gromov/proximity-hri-pipeline/code_and_datasets.zip">here</a>.</p>
+
+<h4 id="latest-version-march-2019">Latest Version (March 2019)</h4>
+
+<p>The latest version of the system is implemented on a lightweight drone <a href="https://www.bitcraze.io/crazyflie-2/">Crazyflie 2.0</a>:</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/yafy-HZMk_U" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p><em>Note: this implementation and the video were presented at <a href="http://humanrobotinteraction.org/2019/">Human-Robot Interaction (HRI) 2019</a> conference where it received the Best Demo and Honorable mention (Best Video according to reviewers) awards.</em></p>
+
+<h4 id="acknowledgment">Acknowledgment</h4>
+
+<p>This work was partially supported by the Swiss National Science Foundation (<a href="http://www.snf.ch">SNSF</a>) through the <a href="https://www.nccr-robotics.ch">National Centre of Competence in Research (NCCR) Robotics</a>.</p>
+
+<h4 id="publications">Publications</h4>
+
+<!-- <li><span id="gromov2018robot">B. Gromov, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span></li> -->
+<ol class="bibliography"><li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019proximity-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019proximity-bibtex, #gromov2019proximity-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019proximity"><b>B. Gromov</b>, G. Abbate, L. Gambardella, and A. Giusti, “Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted IMU,” in <i>2019 IEEE International Conference on Robotics and Automation (ICRA)</i>, 2019, pp. 8084–8091.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2019proximity.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2019proximity.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/hyh_5A4RXZY" onclick="outbound_link('https://youtu.be/hyh_5A4RXZY'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/ICRA.2019.8794399" onclick="outbound_link('https://doi.org/10.1109/ICRA.2019.8794399'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2019proximity-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019proximity-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2019proximity.html">DETAILS</a></div>
+
+
+
+<div id="gromov2019proximity-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019proximity,
+  author = {Gromov, Boris and Abbate, Gabriele and Gambardella, Luca and Giusti, Alessandro},
+  title = {Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted {IMU}},
+  booktitle = {2019 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages = {8084-8091},
+  year = {2019},
+  month = may,
+  doi = {10.1109/ICRA.2019.8794399},
+  issn = {2577-087X},
+  video = {https://youtu.be/hyh_5A4RXZY},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019video-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019video-bibtex, #gromov2019video-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019video"><b>B. Gromov</b>, J. Guzzi, G. Abbate, L. Gambardella, and A. Giusti, “Video: Pointing Gestures for Proximity Interaction,” in <i>HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11–14, 2019, Daegu, Rep. of Korea</i>, 2019.</span>
+
+
+
+
+<div class="csl-video"><a href="https://youtu.be/yafy-HZMk_U" onclick="outbound_link('https://youtu.be/yafy-HZMk_U'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673020" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673020'); return false;">DOI</a></div>
+
+
+
+<div class="csl-award"><a href="/~gromov/img/gromov2019video-award.jpg" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/img/gromov2019video-award.jpg'});">AWARD</a></div>
+
+
+<input type="checkbox" id="gromov2019video-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019video-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2019video.html">DETAILS</a></div>
+
+
+
+<div id="gromov2019video-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019video,
+  author = {Gromov, Boris and Guzzi, J{\'e}r{\^o}me and Abbate, Gabriele and Gambardella, Luca and Giusti, Alessandro},
+  title = {Video: Pointing Gestures for Proximity Interaction},
+  booktitle = {HRI~'19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11--14, 2019, Daegu, Rep. of Korea},
+  conference = {2019 ACM/IEEE International Conference on Human-Robot Interaction},
+  location = {Daegu, Rep. of Korea},
+  year = {2019},
+  month = mar,
+  video = {https://youtu.be/yafy-HZMk_U},
+  doi = {10.1109/HRI.2019.8673020},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019demo-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019demo-bibtex, #gromov2019demo-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019demo"><b>B. Gromov</b>, J. Guzzi, L. Gambardella, and A. Giusti, “Demo: Pointing Gestures for Proximity Interaction,” in <i>HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11–14, 2019, Daegu, Rep. of Korea</i>, 2019.</span>
+
+
+
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673329" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673329'); return false;">DOI</a></div>
+
+
+
+<div class="csl-award"><a href="/~gromov/img/gromov2019demo-award.jpg" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/img/gromov2019demo-award.jpg'});">AWARD</a></div>
+
+
+<input type="checkbox" id="gromov2019demo-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019demo-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+
+
+<div id="gromov2019demo-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019demo,
+  author = {Gromov, Boris and Guzzi, J{\'e}r{\^o}me and Gambardella, Luca and Giusti, Alessandro},
+  title = {Demo: Pointing Gestures for Proximity Interaction},
+  booktitle = {HRI~'19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11--14, 2019, Daegu, Rep. of Korea},
+  conference = {2019 ACM/IEEE International Conference on Human-Robot Interaction},
+  location = {Daegu, Rep. of Korea},
+  year = {2019},
+  month = mar,
+  doi = {10.1109/HRI.2019.8673329},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2018robot-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2018robot-bibtex, #gromov2018robot-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2018robot"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2018robot.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2018robot.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/VaQ3aZBf_uE" onclick="outbound_link('https://youtu.be/VaQ3aZBf_uE'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/IROS.2018.8594174" onclick="outbound_link('https://doi.org/10.1109/IROS.2018.8594174'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2018robot-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2018robot-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2018robot.html">DETAILS</a></div>
+
+
+
+<div id="gromov2018robot-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2018robot,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  title = {Robot Identification and Localization with Pointing Gestures},
+  booktitle = {2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2018},
+  pages = {3921-3928},
+  keywords = {Robot sensing systems;Robot kinematics;Solid modeling;Manipulators;Drones;Three-dimensional displays},
+  doi = {10.1109/IROS.2018.8594174},
+  issn = {2153-0866},
+  month = oct,
+  video = {https://youtu.be/VaQ3aZBf_uE},
+}
+</pre>
+</div>
+</li></ol>
+
+<hr />
+
+<!-- <div class="center">
+  <small>(c) Boris Gromov, 2015 &ndash; 2019</small>
+</div> -->
+
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

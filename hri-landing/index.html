@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107954235-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107954235-1');
+
+      var outbound_link = function(url) {
+        ga('gtag_UA_107954235_1.send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function(){document.location = url;}
+        });
+      }
+	</script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/javascript" src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js">
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Guiding and Landing a drone with Pointing Gestures</title>
+    <meta name="description" content="Personal page of Boris Gromov
+">
+
+    <link rel="stylesheet" href="/~gromov/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/~gromov/css/main.css">
+    <link rel="stylesheet" href="/~gromov/css/csl-blocks.css">
+    <link rel="canonical" href="http://people.idsia.ch/~gromov/hri-landing/">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+
+    <link rel="stylesheet" href="/~gromov/css/flickity.css">
+
+    <script type="text/javascript">
+        window.onload = setupFlickity;
+
+        function setupFlickity() {
+            var carousel = document.querySelectorAll(".carousel")
+
+            carousel.forEach(function(elem, i) {
+                var flkty = new Flickity(elem, {
+                    on: {
+                        ready: function() {
+                            var flkty = Flickity.data(elem)
+
+                            flkty.cells.forEach(function(cell, i) {
+                                if (cell.element == flkty.selectedElement) {
+                                    var video = cell.element.querySelector("video");
+                                    if (video) {
+                                        console.log("Starting active video");
+                                        video.play();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                flkty.on("change", function() {
+                  // console.log("Flickity active slide: " + flkty.selectedIndex);
+
+                  flkty.cells.forEach(function(cell, i) {
+                    if (cell.element == flkty.selectedElement) {
+                      // play video if active slide contains one
+                      // use <video playsinline ..> in your html to assure it works on ios devices
+                      var video = cell.element.querySelector("video");
+                      if (video) {
+                        // console.log("Restarting video " + i);
+                        video.load();
+                        video.play();
+                      }
+                      return;
+                    }
+
+                    // pause all other videos
+                    var video = cell.element.querySelector("video");
+                    if (video) {
+                      // console.log("pausing video " + i);
+                      video.pause();
+                    }
+                  });
+                });
+
+            });
+        }
+    </script>
+</head>
+
+
+  <body>
+    
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+          <header class="post-header">
+            <h1 class="post-title">Guiding and Landing a drone with Pointing Gestures</h1>
+            <h5 class="post-description"></h5>
+          </header>
+
+          <article class="post-content">
+            <p>In this video we demonstrate an intuitive gesture-based interface for manually guiding a drone to land on a precise spot. Using unobtrusive wearable sensors, an operator can quickly and accurately maneuver and land the drone after very little training; a preliminary user study on 5 subjects shows that the system compares favorably with a traditional joystick interface.</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/jpG8Jsmth2Y" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>The video has been accepted for publication at Human-Robot Interaction (HRI 2018) conference <a href="#gromov2018video">[1]</a>, March 5-8, 2018, Chicago, IL, USA.</p>
+
+<p>To detect the events of pointing we used 1-D convolutional neural network (CNN) that receives a stream of acceleration and orientation data from two inertial measurement units (IMUs) placed on user’s arm <a href="#broggini2018learning">[2]</a>.</p>
+
+<h4 id="design-of-the-user-study">Design of the user study</h4>
+
+<p>Video demonstration of a part of experimental sequence performed in the user study.</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/YPsR1XJAPrc" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p></p>
+
+<p>The next video shows collated trajectory animations for all the subjects for two interfaces: joystick (blue) and pointing (green). The popping dots over the right target signify the landing of the drone:</p>
+
+<div class="video-container" style="/*margin-right: 35px*/">
+	<video width="680" autoplay="" loop="" controls="">
+		<source src="img/trajectories-single-anim.mp4" type="video/mp4" />
+	</video>
+</div>
+
+<p>The Python <a href="/~gromov/hri-landing/code.zip">code</a> and corresponding <a href="/~gromov/hri-landing/hri-landing-dataset.zip">dataset</a> (ROS bag-files) can be used to reproduce the results presented in this work.</p>
+
+<h4 id="example-of-guiding-and-landing">Example of Guiding and Landing</h4>
+
+<p>An example of pointing gestures being used for steering and landing a drone:</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/fqEBN5L2HoM" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h4 id="acknowledgment">Acknowledgment</h4>
+
+<p>This work was partially supported by the Swiss National Science Foundation (<a href="http://www.snf.ch">SNSF</a>) through the <a href="https://www.nccr-robotics.ch">National Centre of Competence in Research (NCCR) Robotics</a>.</p>
+
+<h4 id="publications">Publications</h4>
+
+<!-- <li><span id="gromov2018video">B. Gromov, L. Gambardella, and A. Giusti, “Video: Landing a Drone with Pointing Gestures,” in <i>HRI ’18 Companion: 2018 ACM/IEEE International Conference on Human-Robot Interaction Companion, March 5–8, 2018, Chicago, IL, USA</i>, 2018.</span></li> -->
+<ol class="bibliography"><li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2020guiding-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2020guiding-bibtex, #gromov2020guiding-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2020guiding"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Guiding Quadrotor Landing with Pointing Gestures,” in <i>Human-Friendly Robotics 2019</i>, Cham, 2020, pp. 1–14.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2020guiding.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2020guiding.pdf'});">PDF</a></div>
+
+
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1007/978-3-030-42026-0_1" onclick="outbound_link('https://doi.org/10.1007/978-3-030-42026-0_1'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2020guiding-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2020guiding-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2020guiding.html">DETAILS</a></div>
+
+
+
+<div id="gromov2020guiding-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2020guiding,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  editor = {Ferraguti, Federica and Villani, Valeria and Sabattini, Lorenzo and Bonf{\`e}, Marcello},
+  title = {Guiding Quadrotor Landing with Pointing Gestures},
+  booktitle = {Human-Friendly Robotics 2019},
+  year = {2020},
+  month = feb,
+  publisher = {Springer International Publishing},
+  address = {Cham},
+  pages = {1--14},
+  isbn = {978-3-030-42026-0},
+  doi = {10.1007/978-3-030-42026-0_1},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2018video-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2018video-bibtex, #gromov2018video-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2018video"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Video: Landing a Drone with Pointing Gestures,” in <i>HRI ’18 Companion: 2018 ACM/IEEE International Conference on Human-Robot Interaction Companion, March 5–8, 2018, Chicago, IL, USA</i>, 2018.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2018video.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2018video.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/jpG8Jsmth2Y" onclick="outbound_link('https://youtu.be/jpG8Jsmth2Y'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1145/3173386.3177530" onclick="outbound_link('https://doi.org/10.1145/3173386.3177530'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2018video-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2018video-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2018video.html">DETAILS</a></div>
+
+
+
+<div id="gromov2018video-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2018video,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  title = {Video: Landing a Drone with Pointing Gestures},
+  booktitle = {HRI~'18 Companion: 2018 ACM/IEEE International Conference on Human-Robot Interaction Companion, March 5--8, 2018, Chicago, IL, USA},
+  conference = {2018 ACM/IEEE International Conference on Human-Robot Interaction Companion},
+  doi = {10.1145/3173386.3177530},
+  isbn = {978-1-4503-5615-2/18/03},
+  location = {Chicago, IL, USA},
+  year = {2018},
+  month = mar,
+  acmid = {3177530},
+  publisher = {ACM},
+  video = {https://youtu.be/jpG8Jsmth2Y},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #broggini2018learning-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #broggini2018learning-bibtex, #broggini2018learning-show {
+	    display: none;
+	}
+</style>
+
+<span id="broggini2018learning">D. Broggini, <b>B. Gromov</b>, L. M. Gambardella, and A. Giusti, “Learning to detect pointing gestures from wearable IMUs,” in <i>Proceedings of Thirty-Second AAAI Conference on Artificial Intelligence, February 2-7, 2018, New Orleans, Louisiana, USA</i>, 2018.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/broggini2018learning.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/broggini2018learning.pdf'});">PDF</a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="checkbox" id="broggini2018learning-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="broggini2018learning-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+
+
+<div id="broggini2018learning-bibtex">
+	<p></p>
+	<pre>@inproceedings{broggini2018learning,
+  author = {Broggini, Denis and Gromov, Boris and Gambardella, Luca M. and Giusti, Alessandro},
+  title = {Learning to detect pointing gestures from wearable {IMUs}},
+  booktitle = {Proceedings of Thirty-Second {AAAI} Conference on Artificial Intelligence, February 2-7, 2018, New Orleans, Louisiana, {USA}},
+  year = {2018},
+  month = feb,
+  publisher = { {AAAI} Press},
+  url = {https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16259/16463},
+}
+</pre>
+</div>
+</li></ol>
+
+<hr />
+
+<!-- <div class="center">
+  <small>(c) Boris Gromov, 2015 &ndash; 2020</small>
+</div> -->
+
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

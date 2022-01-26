@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107954235-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107954235-1');
+
+      var outbound_link = function(url) {
+        ga('gtag_UA_107954235_1.send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function(){document.location = url;}
+        });
+      }
+	</script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/javascript" src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js">
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Robot Identification and Localization with Pointing Gestures</title>
+    <meta name="description" content="Personal page of Boris Gromov
+">
+
+    <link rel="stylesheet" href="/~gromov/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/~gromov/css/main.css">
+    <link rel="stylesheet" href="/~gromov/css/csl-blocks.css">
+    <link rel="canonical" href="http://people.idsia.ch/~gromov/motion-relloc/">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+
+    <link rel="stylesheet" href="/~gromov/css/flickity.css">
+
+    <script type="text/javascript">
+        window.onload = setupFlickity;
+
+        function setupFlickity() {
+            var carousel = document.querySelectorAll(".carousel")
+
+            carousel.forEach(function(elem, i) {
+                var flkty = new Flickity(elem, {
+                    on: {
+                        ready: function() {
+                            var flkty = Flickity.data(elem)
+
+                            flkty.cells.forEach(function(cell, i) {
+                                if (cell.element == flkty.selectedElement) {
+                                    var video = cell.element.querySelector("video");
+                                    if (video) {
+                                        console.log("Starting active video");
+                                        video.play();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                flkty.on("change", function() {
+                  // console.log("Flickity active slide: " + flkty.selectedIndex);
+
+                  flkty.cells.forEach(function(cell, i) {
+                    if (cell.element == flkty.selectedElement) {
+                      // play video if active slide contains one
+                      // use <video playsinline ..> in your html to assure it works on ios devices
+                      var video = cell.element.querySelector("video");
+                      if (video) {
+                        // console.log("Restarting video " + i);
+                        video.load();
+                        video.play();
+                      }
+                      return;
+                    }
+
+                    // pause all other videos
+                    var video = cell.element.querySelector("video");
+                    if (video) {
+                      // console.log("pausing video " + i);
+                      video.pause();
+                    }
+                  });
+                });
+
+            });
+        }
+    </script>
+</head>
+
+
+  <body>
+    
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+          <header class="post-header">
+            <h1 class="post-title">Robot Identification and Localization with Pointing Gestures</h1>
+            <h5 class="post-description"></h5>
+          </header>
+
+          <article class="post-content">
+            <p><i>The work has been presented at <a href="http://iros2018.org">International Conference on Intelligent Robots and Systems (IROS)</a>, October 1-5, 2018, Madrid, Spain.</i></p>
+
+<p>We demonstrate a novel approach to localize a mobile robot with respect to an operator in its proximity through a simple pointing gesture interaction.</p>
+
+<p>The code and datasets to reproduce the results presented in the paper can be found <a href="/~gromov/motion-relloc/code.zip">here</a>.</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/VaQ3aZBf_uE" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>The interaction consists of two phases:</p>
+
+<ul>
+  <li><strong>Phase 1</strong>: Operator points at the robot they want to interact with and trigger the start of interaction.</li>
+  <li><strong>Phase 2</strong>: Robot starts moving along a predefined trajectory; the operator keeps following robot’s position with a pointing gesture; the system acquires a set of pairs of pointing rays \( r_i \) in operator’s frame and robot positions \( P_i \) in robot’s frame, and establishes the coordinate transformation \( T^* \) between the two frames using nonlinear optimization procedure.</li>
+</ul>
+
+<!-- $$ \theta\left(T, \mathcal{C}\right) = \frac{1}{N}\sum_{i=1}^{N} \angle(r_i^{_{\{H\}}}, q_i^{_{\{H\}}}) $$
+
+$$ T^* = {\underset {T}{\operatorname {arg\,min} }}\,\theta(T, \mathcal{C}) $$
+ -->
+
+<div class="center">
+	<img style="width: 75%" src="img/motion-relloc-real-life.jpg" />
+	<figcaption>
+		<b>Fig 1</b>: Using wearable sensors we reconstruct the arm posture and find a pointing ray \( r_i \). We put these rays in correspondence with positions of the robot \( P_i \).
+	</figcaption>
+</div>
+<!-- <div class="col three caption"> -->
+<!-- </div> -->
+
+<p>The <a href="/~gromov/motion-relloc/code.zip">data</a> (see <code>data/</code> folder) was acquired using two trajectories depicted bellow (left). We also distorted the ground truth trajectories with a simple visual-odometry error model to check how does our algorithm cope with errors in sensory information of a robot.</p>
+
+<div class="img_row">
+	<img style="width: 40%" src="img/motion-relloc-two-traj.png" />
+	<img style="width: 10%" />
+	<img style="width: 42%" src="img/motion-relloc-vo-traj.png" />
+</div>
+<div class="center">
+	<figcaption>
+		<b>Fig 2</b>: (<i>Left</i>) Experimental setup for data collection (ground truth): two trajectories and corresponding operator positions.
+		(<i>Right</i>) Simulated odometry estimates of the drone trajectories with different noise level settings.
+	</figcaption>
+</div>
+
+<p>The residual error of the nonlinear optimization procedure can be used to identify the robot that was pointed at by operator among multiple moving robots. In this case the above described algorithm changes as follows:</p>
+
+<div class="center">
+	<img style="width: 95%; padding: 20px; padding-top: 0px" src="img/motion-relloc-multi-robot.png" />
+	<figcaption>
+		<b>Fig 3</b>: <i>Left</i>, <b>Phase 1</b>: the operator points at the robot they want to interact with; an explicit (button press) or implicit (pointing gesture detection) event triggers the beginning of the interaction. <i>Center</i>, <b>Phase 2</b>: all nearby robots start moving along different paths, and the operator keeps pointing at the target robot; the system acquires a set of pairs each composed by: a pointing ray \( r \) in the operator’s frame of reference \( {H} \); a point \( P \) in the robot’s odometry frame \( {R} \). <i>Right</i>: after a few seconds the system has identified the target robot and reconstructed the transformation \( T^* \) linking \( {H} \) and \( {R} \): pointing rays can be known in the robot’s frame, and the interaction can continue in an application-dependent way.
+	</figcaption>
+</div>
+
+<p>Please refer to the paper to see results and discussion.</p>
+
+<h4 id="live-demo-hubweek-boston-ma">Live Demo @HUBweek (Boston, MA)</h4>
+
+<p>We demonstrated our system live on October 8-9, 2018 at the <a href="https://www.swissnexboston.org/HUBweek/">Aerial Futures: The Drone Frontiers</a> event during the HUBweek in Boston, MA, USA.</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/xEZX8j3JpOs" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>This implementation uses the <a href="https://mbientlab.com/product/wristband-sensor-research-kit/">MetaMotionR+</a> bracelet (similar to a smartwatch) and the <a href="https://www.bitcraze.io/crazyflie-2/">Crazyflie 2.0</a> drone. Note that we do not use any external localization system, the drone is controlled directly in its (visual) odometry frame.</p>
+
+<h4 id="acknowledgment">Acknowledgment</h4>
+
+<p>This work was partially supported by the Swiss National Science Foundation (<a href="http://www.snf.ch">SNSF</a>) through the <a href="https://www.nccr-robotics.ch">National Centre of Competence in Research (NCCR) Robotics</a>.</p>
+
+<h4 id="publications">Publications</h4>
+
+<!-- <li><span id="gromov2018robot">B. Gromov, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span></li> -->
+<ol class="bibliography"><li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2018robot-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2018robot-bibtex, #gromov2018robot-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2018robot"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2018robot.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2018robot.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/VaQ3aZBf_uE" onclick="outbound_link('https://youtu.be/VaQ3aZBf_uE'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/IROS.2018.8594174" onclick="outbound_link('https://doi.org/10.1109/IROS.2018.8594174'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2018robot-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2018robot-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2018robot.html">DETAILS</a></div>
+
+
+
+<div id="gromov2018robot-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2018robot,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  title = {Robot Identification and Localization with Pointing Gestures},
+  booktitle = {2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2018},
+  pages = {3921-3928},
+  keywords = {Robot sensing systems;Robot kinematics;Solid modeling;Manipulators;Drones;Three-dimensional displays},
+  doi = {10.1109/IROS.2018.8594174},
+  issn = {2153-0866},
+  month = oct,
+  video = {https://youtu.be/VaQ3aZBf_uE},
+}
+</pre>
+</div>
+</li></ol>
+
+<hr />
+
+<!-- <div class="center">
+  <small>(c) Boris Gromov, 2015 &ndash; 2019</small>
+</div> -->
+
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

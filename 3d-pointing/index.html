@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107954235-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107954235-1');
+
+      var outbound_link = function(url) {
+        ga('gtag_UA_107954235_1.send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function(){document.location = url;}
+        });
+      }
+	</script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/javascript" src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js">
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures</title>
+    <meta name="description" content="Personal page of Boris Gromov
+">
+
+    <link rel="stylesheet" href="/~gromov/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/~gromov/css/main.css">
+    <link rel="stylesheet" href="/~gromov/css/csl-blocks.css">
+    <link rel="canonical" href="http://people.idsia.ch/~gromov/3d-pointing/">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+
+    <link rel="stylesheet" href="/~gromov/css/flickity.css">
+
+    <script type="text/javascript">
+        window.onload = setupFlickity;
+
+        function setupFlickity() {
+            var carousel = document.querySelectorAll(".carousel")
+
+            carousel.forEach(function(elem, i) {
+                var flkty = new Flickity(elem, {
+                    on: {
+                        ready: function() {
+                            var flkty = Flickity.data(elem)
+
+                            flkty.cells.forEach(function(cell, i) {
+                                if (cell.element == flkty.selectedElement) {
+                                    var video = cell.element.querySelector("video");
+                                    if (video) {
+                                        console.log("Starting active video");
+                                        video.play();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                flkty.on("change", function() {
+                  // console.log("Flickity active slide: " + flkty.selectedIndex);
+
+                  flkty.cells.forEach(function(cell, i) {
+                    if (cell.element == flkty.selectedElement) {
+                      // play video if active slide contains one
+                      // use <video playsinline ..> in your html to assure it works on ios devices
+                      var video = cell.element.querySelector("video");
+                      if (video) {
+                        // console.log("Restarting video " + i);
+                        video.load();
+                        video.play();
+                      }
+                      return;
+                    }
+
+                    // pause all other videos
+                    var video = cell.element.querySelector("video");
+                    if (video) {
+                      // console.log("pausing video " + i);
+                      video.pause();
+                    }
+                  });
+                });
+
+            });
+        }
+    </script>
+</head>
+
+
+  <body>
+    
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+          <header class="post-header">
+            <h1 class="post-title">Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures</h1>
+            <h5 class="post-description"></h5>
+          </header>
+
+          <article class="post-content">
+            
+<p><i>This page contains supplementary information for our submission at ICRA 2020 conference.</i></p>
+
+<p>We consider the case in which an operator needs to control a quadrotor in their close proximity, within visual contact, and along complex 3D trajectories. In particular, the operator controls the mobile robot by pointing at a desired target position in 3D space for the robot to reach; the robot moves there, and keeps following the updated position if the operator changes their pointing. This allows the operator to finely control the robot in a continuous fashion, and drive the robot along complex trajectories.</p>
+
+<p>Regardless of the way it is sensed, the act of pointing by itself does not univocally identify the desired target position; in fact, a given pointing stance identifies a pointing ray in 3D space, originating at the operator’s position and extending to infinity along a given 3D direction: the target point might lie anywhere on the pointing ray. In certain scenarios we can identify this point: if the robot motion is constrained to a plane (e.g. robot moving on flat ground or flying at a fixed height) or if the required target point lies close to a surface of the world (e.g. quadruped robot walking on a generic terrain). In these cases the target point can be found as an intersection of the pointing ray with the respective surface.</p>
+
+<p>In this paper we consider the case in which we control a quadrotor that freely moves in 3D space, and these constraints do not apply. We propose and validate a pragmatic solution based on a push button acting as a simple additional input device. Results of a study involving ten subjects show that the approach performs well on a challenging 3D piloting task, where it compares favorably with joystick control.</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/9PeCe9AVh-4" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h4 id="implementation">Implementation</h4>
+
+<p>To define robot’s position in a free 3D space we intersect the pointing ray with a virtual workspace surface. As has been shown in our previous works, in its simplest form such surface can be a plane parallel to the ground. We extend this approach by adding the second workspace surface that also allows to control robot’s altitude. To switch between these two surfaces the user is using a simple push button control.</p>
+
+<p>Among various combinations of workspace surface shapes we chose a cylinder and a horizontal plane. On the one hand, it allows to control horizontal distance between the user and the robot, and on the other hand to control robot’s altitude without changing the horizontal distance. Both surfaces are defined to pass through the robot’s current position. Additionally, the cylinder is rooted at the user’s origin.</p>
+
+<p>The Figure 1 shows the main interaction stages. Note that in certain cases switching between the workspaces can be dangerous or impossible (Fig. 1, d), e.g. when there is no intersection between pointing ray and the workspace surface.</p>
+
+<div class="center">
+	<img style="width: 95%" src="img/method_overview.png" />
+	<figcaption>
+		<b>Fig&nbsp;1</b>: Interaction using workspace shapes: a) User guides the drone in the primary workspace (cylinder); b) User switches to the secondary shape by pressing a button; c) User guides the drone in secondary workspace (horizontal plane); d) User is forbidden to switch the workspace.
+	</figcaption>
+</div>
+
+<div class="center">
+	<div class="carousel">
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-0.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-1.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-2.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-3.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-4.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-5.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-6.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-7.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/pointing-8.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+	</div>
+	<figcaption>
+		<b>Fig&nbsp;2</b>: Visualization of the segments of trajectories performed with pointing. The green curves represent parts performed using cylinder workspace, while the red ones using the horizontal plane workspace. The short cylinders represent the targets and the tall thin cylinder represents the user.
+	</figcaption>
+</div>
+
+<div class="center">
+	<div class="carousel">
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-0.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-1.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-2.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-3.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-4.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-5.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-6.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-7.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+		<div class="carousel-cell">
+			<div class="video-container">
+				<video width="100%" loop="" muted="" playsinline="" preload="auto">
+					<source src="img/anim/joystick-8.mp4" type="video/mp4" />&lt;/source&gt;
+				</video>
+			</div>
+		</div>
+	
+	</div>
+	<figcaption>
+		<b>Fig&nbsp;3</b>: Visualization of the segments of trajectories performed with joystick.
+	</figcaption>
+</div>
+
+<h4 id="experiments">Experiments</h4>
+
+<p>We experimentally shown the viability of this approach and found that our method compares favorably with commodity joystick controllers.</p>
+
+<div class="center">
+	<img style="width: 95%" src="img/results.jpg" />
+	<figcaption>
+		<b>Fig&nbsp;4</b>: Analysis of the evolution in time of the distance to the target, for each trajectory flown; each trajectory is represented as a line; Left: joystick interface (N = 90). Center: pointing interface (N = 90). Right: average over all trajectories for each interface.
+	</figcaption>
+</div>
+
+<p>Please refer to <a href="/~gromov/3d-pointing/appendix.pdf">supplementary appendix</a> for discussion on chosen virtual shapes and for additional details on experimental setup.</p>
+
+<h4 id="code-and-datasets">Code and Datasets</h4>
+
+<p>The code and datasets to reproduce the results presented in this work can be found <a href="https://doi.org/10.5281/zenodo.3866472">here</a>.</p>
+<p>The ROS packages source code: <a href="https://github.com/idsia-robotics/volaly">https://github.com/idsia-robotics/volaly</a>.</p>
+
+<h4 id="acknowledgment">Acknowledgment</h4>
+
+<p>This work was partially supported by the Swiss National Science Foundation (<a href="http://www.snf.ch">SNSF</a>) through the <a href="https://www.nccr-robotics.ch">National Centre of Competence in Research (NCCR) Robotics</a>.</p>
+
+<h4 id="related-publications">Related Publications</h4>
+
+<ol class="bibliography"><li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2020intuitive-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2020intuitive-bibtex, #gromov2020intuitive-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2020intuitive"><b>B. Gromov</b>, J. Guzzi, L. Gambardella, and A. Giusti, “Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures,” in <i>2020 IEEE International Conference on Robotics and Automation (ICRA)</i>, 2020, <i>to appear</i>.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2020intuitive.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2020intuitive.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/9PeCe9AVh-4" onclick="outbound_link('https://youtu.be/9PeCe9AVh-4'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+
+
+
+<input type="checkbox" id="gromov2020intuitive-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2020intuitive-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2020intuitive.html">DETAILS</a></div>
+
+
+
+<div id="gromov2020intuitive-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2020intuitive,
+  author = {Gromov, Boris and Guzzi, J{\'e}r{\^o}me and Gambardella, Luca and Giusti, Alessandro},
+  title = {Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures},
+  booktitle = {2020 IEEE International Conference on Robotics and Automation (ICRA)},
+  year = {2020},
+  month = may,
+  keywords = {Robot sensing systems;Robot kinematics;Solid modeling;Manipulators;Drones;Three-dimensional displays},
+  video = {https://youtu.be/9PeCe9AVh-4},
+  note = {to appear},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019proximity-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019proximity-bibtex, #gromov2019proximity-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019proximity"><b>B. Gromov</b>, G. Abbate, L. Gambardella, and A. Giusti, “Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted IMU,” in <i>2019 IEEE International Conference on Robotics and Automation (ICRA)</i>, 2019, pp. 8084–8091.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2019proximity.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2019proximity.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/hyh_5A4RXZY" onclick="outbound_link('https://youtu.be/hyh_5A4RXZY'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/ICRA.2019.8794399" onclick="outbound_link('https://doi.org/10.1109/ICRA.2019.8794399'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2019proximity-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019proximity-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2019proximity.html">DETAILS</a></div>
+
+
+
+<div id="gromov2019proximity-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019proximity,
+  author = {Gromov, Boris and Abbate, Gabriele and Gambardella, Luca and Giusti, Alessandro},
+  title = {Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted {IMU}},
+  booktitle = {2019 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages = {8084-8091},
+  year = {2019},
+  month = may,
+  doi = {10.1109/ICRA.2019.8794399},
+  issn = {2577-087X},
+  video = {https://youtu.be/hyh_5A4RXZY},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2018robot-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2018robot-bibtex, #gromov2018robot-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2018robot"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2018robot.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2018robot.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/VaQ3aZBf_uE" onclick="outbound_link('https://youtu.be/VaQ3aZBf_uE'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/IROS.2018.8594174" onclick="outbound_link('https://doi.org/10.1109/IROS.2018.8594174'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2018robot-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2018robot-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2018robot.html">DETAILS</a></div>
+
+
+
+<div id="gromov2018robot-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2018robot,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  title = {Robot Identification and Localization with Pointing Gestures},
+  booktitle = {2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2018},
+  pages = {3921-3928},
+  keywords = {Robot sensing systems;Robot kinematics;Solid modeling;Manipulators;Drones;Three-dimensional displays},
+  doi = {10.1109/IROS.2018.8594174},
+  issn = {2153-0866},
+  month = oct,
+  video = {https://youtu.be/VaQ3aZBf_uE},
+}
+</pre>
+</div>
+</li></ol>
+
+<hr />
+
+<!-- <div class="center">
+  <small>(c) Boris Gromov, 2015 &ndash; 2020</small>
+</div> -->
+
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

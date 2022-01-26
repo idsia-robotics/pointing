@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107954235-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-107954235-1');
+
+      var outbound_link = function(url) {
+        ga('gtag_UA_107954235_1.send', 'event', 'outbound', 'click', url, {
+            'transport': 'beacon',
+            'hitCallback': function(){document.location = url;}
+        });
+      }
+	</script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+
+    <script type="text/javascript" src="https://npmcdn.com/flickity@2/dist/flickity.pkgd.js">
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Pointing Gestures for Human-Robot Proximity Interaction</title>
+    <meta name="description" content="Personal page of Boris Gromov
+">
+
+    <link rel="stylesheet" href="/~gromov/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/~gromov/css/main.css">
+    <link rel="stylesheet" href="/~gromov/css/csl-blocks.css">
+    <link rel="canonical" href="http://people.idsia.ch/~gromov/pointing-gestures/">
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+
+    <link rel="stylesheet" href="/~gromov/css/flickity.css">
+
+    <script type="text/javascript">
+        window.onload = setupFlickity;
+
+        function setupFlickity() {
+            var carousel = document.querySelectorAll(".carousel")
+
+            carousel.forEach(function(elem, i) {
+                var flkty = new Flickity(elem, {
+                    on: {
+                        ready: function() {
+                            var flkty = Flickity.data(elem)
+
+                            flkty.cells.forEach(function(cell, i) {
+                                if (cell.element == flkty.selectedElement) {
+                                    var video = cell.element.querySelector("video");
+                                    if (video) {
+                                        console.log("Starting active video");
+                                        video.play();
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+                flkty.on("change", function() {
+                  // console.log("Flickity active slide: " + flkty.selectedIndex);
+
+                  flkty.cells.forEach(function(cell, i) {
+                    if (cell.element == flkty.selectedElement) {
+                      // play video if active slide contains one
+                      // use <video playsinline ..> in your html to assure it works on ios devices
+                      var video = cell.element.querySelector("video");
+                      if (video) {
+                        // console.log("Restarting video " + i);
+                        video.load();
+                        video.play();
+                      }
+                      return;
+                    }
+
+                    // pause all other videos
+                    var video = cell.element.querySelector("video");
+                    if (video) {
+                      // console.log("pausing video " + i);
+                      video.pause();
+                    }
+                  });
+                });
+
+            });
+        }
+    </script>
+</head>
+
+
+  <body>
+    
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+          <header class="post-header">
+            <h1 class="post-title">Pointing Gestures for Human-Robot Proximity Interaction</h1>
+            <h5 class="post-description"></h5>
+          </header>
+
+          <article class="post-content">
+            <p>This project targets the problems of interaction with robots in human’s proximity, within the direct line of sight.</p>
+
+<p>We study the ways to capture and use human pointing gestures with the help of wearable sensors. This approach allows to avoid the typical problems of computer vision systems, such as occlusions, low illumination, and the need for extensive computational resources. The main drawback of this approach is the lack of localization between the user and the robot—the knowledge that is usually available for “free” with vision systems. To solve it, we require the user to point at and follow the autonomously moving robot for a few seconds: during that stage we collect synchronized pairs of pointing rays and robot positions. We then align the pointing rays with robot’s trajectory to estimate the coordinate frame transformation between the agents.</p>
+
+<p>An overview of our approach is shown in the following video:</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/yafy-HZMk_U" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>For more details, please refer to the publications section at the bottom of the page.</p>
+
+<h4 id="live-demo-hubweek-boston-ma">Live Demo @HUBweek (Boston, MA)</h4>
+
+<p>We demonstrated our system live on October 8-9, 2018 at the <a href="https://www.swissnexboston.org/HUBweek/">Aerial Futures: The Drone Frontiers</a> event during the HUBweek in Boston, MA, USA.</p>
+
+<div class="video-container">
+	<iframe width="680" height="383" src="https://www.youtube.com/embed/xEZX8j3JpOs" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<p>This implementation uses the <a href="https://mbientlab.com/product/wristband-sensor-research-kit/">MetaMotionR+</a> bracelet (similar to a smartwatch) and the <a href="https://www.bitcraze.io/crazyflie-2/">Crazyflie 2.0</a> drone. Note that we do not use any external localization system, the drone is controlled directly in its (visual) odometry frame.</p>
+
+<h4 id="awards-hri-2019-daegu-south-korea">Awards @HRI 2019 (Daegu, South Korea)</h4>
+
+<p>A new version of the demo and the video were received very well at the <a href="http://humanrobotinteraction.org/2019/">Human-Robot Interaction (HRI) 2019</a> conference that took place on March 11-14, 2019 in Daegu, South Korea. We acquired <strong>both</strong> the <a href="/~gromov/img/gromov2019demo-award.jpg">Best Demo</a> and <a href="/~gromov/img/gromov2019video-award.jpg">honorable mention</a> (Best Video according to reviewers) awards!</p>
+
+<h4 id="acknowledgment">Acknowledgment</h4>
+
+<p>This work was partially supported by the Swiss National Science Foundation (<a href="http://www.snf.ch">SNSF</a>) through the <a href="https://www.nccr-robotics.ch">National Centre of Competence in Research (NCCR) Robotics</a>.</p>
+
+<h4 id="publications">Publications</h4>
+
+<!-- <li><span id="gromov2018robot">B. Gromov, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span></li> -->
+<ol class="bibliography"><li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019proximity-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019proximity-bibtex, #gromov2019proximity-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019proximity"><b>B. Gromov</b>, G. Abbate, L. Gambardella, and A. Giusti, “Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted IMU,” in <i>2019 IEEE International Conference on Robotics and Automation (ICRA)</i>, 2019, pp. 8084–8091.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2019proximity.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2019proximity.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/hyh_5A4RXZY" onclick="outbound_link('https://youtu.be/hyh_5A4RXZY'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/ICRA.2019.8794399" onclick="outbound_link('https://doi.org/10.1109/ICRA.2019.8794399'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2019proximity-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019proximity-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2019proximity.html">DETAILS</a></div>
+
+
+
+<div id="gromov2019proximity-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019proximity,
+  author = {Gromov, Boris and Abbate, Gabriele and Gambardella, Luca and Giusti, Alessandro},
+  title = {Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted {IMU}},
+  booktitle = {2019 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages = {8084-8091},
+  year = {2019},
+  month = may,
+  doi = {10.1109/ICRA.2019.8794399},
+  issn = {2577-087X},
+  video = {https://youtu.be/hyh_5A4RXZY},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019video-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019video-bibtex, #gromov2019video-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019video"><b>B. Gromov</b>, J. Guzzi, G. Abbate, L. Gambardella, and A. Giusti, “Video: Pointing Gestures for Proximity Interaction,” in <i>HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11–14, 2019, Daegu, Rep. of Korea</i>, 2019.</span>
+
+
+
+
+<div class="csl-video"><a href="https://youtu.be/yafy-HZMk_U" onclick="outbound_link('https://youtu.be/yafy-HZMk_U'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673020" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673020'); return false;">DOI</a></div>
+
+
+
+<div class="csl-award"><a href="/~gromov/img/gromov2019video-award.jpg" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/img/gromov2019video-award.jpg'});">AWARD</a></div>
+
+
+<input type="checkbox" id="gromov2019video-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019video-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2019video.html">DETAILS</a></div>
+
+
+
+<div id="gromov2019video-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019video,
+  author = {Gromov, Boris and Guzzi, J{\'e}r{\^o}me and Abbate, Gabriele and Gambardella, Luca and Giusti, Alessandro},
+  title = {Video: Pointing Gestures for Proximity Interaction},
+  booktitle = {HRI~'19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11--14, 2019, Daegu, Rep. of Korea},
+  conference = {2019 ACM/IEEE International Conference on Human-Robot Interaction},
+  location = {Daegu, Rep. of Korea},
+  year = {2019},
+  month = mar,
+  video = {https://youtu.be/yafy-HZMk_U},
+  doi = {10.1109/HRI.2019.8673020},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2019demo-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2019demo-bibtex, #gromov2019demo-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2019demo"><b>B. Gromov</b>, J. Guzzi, L. Gambardella, and A. Giusti, “Demo: Pointing Gestures for Proximity Interaction,” in <i>HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11–14, 2019, Daegu, Rep. of Korea</i>, 2019.</span>
+
+
+
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673329" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673329'); return false;">DOI</a></div>
+
+
+
+<div class="csl-award"><a href="/~gromov/img/gromov2019demo-award.jpg" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/img/gromov2019demo-award.jpg'});">AWARD</a></div>
+
+
+<input type="checkbox" id="gromov2019demo-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2019demo-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+
+
+<div id="gromov2019demo-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2019demo,
+  author = {Gromov, Boris and Guzzi, J{\'e}r{\^o}me and Gambardella, Luca and Giusti, Alessandro},
+  title = {Demo: Pointing Gestures for Proximity Interaction},
+  booktitle = {HRI~'19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11--14, 2019, Daegu, Rep. of Korea},
+  conference = {2019 ACM/IEEE International Conference on Human-Robot Interaction},
+  location = {Daegu, Rep. of Korea},
+  year = {2019},
+  month = mar,
+  doi = {10.1109/HRI.2019.8673329},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2018robot-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2018robot-bibtex, #gromov2018robot-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2018robot"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Robot Identification and Localization with Pointing Gestures,” in <i>2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</i>, 2018, pp. 3921–3928.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2018robot.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2018robot.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/VaQ3aZBf_uE" onclick="outbound_link('https://youtu.be/VaQ3aZBf_uE'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/IROS.2018.8594174" onclick="outbound_link('https://doi.org/10.1109/IROS.2018.8594174'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2018robot-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2018robot-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2018robot.html">DETAILS</a></div>
+
+
+
+<div id="gromov2018robot-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2018robot,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  title = {Robot Identification and Localization with Pointing Gestures},
+  booktitle = {2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year = {2018},
+  pages = {3921-3928},
+  keywords = {Robot sensing systems;Robot kinematics;Solid modeling;Manipulators;Drones;Three-dimensional displays},
+  doi = {10.1109/IROS.2018.8594174},
+  issn = {2153-0866},
+  month = oct,
+  video = {https://youtu.be/VaQ3aZBf_uE},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2018video-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2018video-bibtex, #gromov2018video-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2018video"><b>B. Gromov</b>, L. Gambardella, and A. Giusti, “Video: Landing a Drone with Pointing Gestures,” in <i>HRI ’18 Companion: 2018 ACM/IEEE International Conference on Human-Robot Interaction Companion, March 5–8, 2018, Chicago, IL, USA</i>, 2018.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2018video.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2018video.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/jpG8Jsmth2Y" onclick="outbound_link('https://youtu.be/jpG8Jsmth2Y'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1145/3173386.3177530" onclick="outbound_link('https://doi.org/10.1145/3173386.3177530'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2018video-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2018video-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+<div class="csl-pdf"><a href="/~gromov/bibliography/gromov2018video.html">DETAILS</a></div>
+
+
+
+<div id="gromov2018video-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2018video,
+  author = {Gromov, Boris and Gambardella, Luca and Giusti, Alessandro},
+  title = {Video: Landing a Drone with Pointing Gestures},
+  booktitle = {HRI~'18 Companion: 2018 ACM/IEEE International Conference on Human-Robot Interaction Companion, March 5--8, 2018, Chicago, IL, USA},
+  conference = {2018 ACM/IEEE International Conference on Human-Robot Interaction Companion},
+  doi = {10.1145/3173386.3177530},
+  isbn = {978-1-4503-5615-2/18/03},
+  location = {Chicago, IL, USA},
+  year = {2018},
+  month = mar,
+  acmid = {3177530},
+  publisher = {ACM},
+  video = {https://youtu.be/jpG8Jsmth2Y},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #broggini2018learning-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #broggini2018learning-bibtex, #broggini2018learning-show {
+	    display: none;
+	}
+</style>
+
+<span id="broggini2018learning">D. Broggini, <b>B. Gromov</b>, L. M. Gambardella, and A. Giusti, “Learning to detect pointing gestures from wearable IMUs,” in <i>Proceedings of Thirty-Second AAAI Conference on Artificial Intelligence, February 2-7, 2018, New Orleans, Louisiana, USA</i>, 2018.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/broggini2018learning.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/broggini2018learning.pdf'});">PDF</a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="checkbox" id="broggini2018learning-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="broggini2018learning-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+
+
+<div id="broggini2018learning-bibtex">
+	<p></p>
+	<pre>@inproceedings{broggini2018learning,
+  author = {Broggini, Denis and Gromov, Boris and Gambardella, Luca M. and Giusti, Alessandro},
+  title = {Learning to detect pointing gestures from wearable {IMUs}},
+  booktitle = {Proceedings of Thirty-Second {AAAI} Conference on Artificial Intelligence, February 2-7, 2018, New Orleans, Louisiana, {USA}},
+  year = {2018},
+  month = feb,
+  publisher = { {AAAI} Press},
+  url = {https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/view/16259/16463},
+}
+</pre>
+</div>
+</li>
+<li><style type="text/css">
+	input[type='checkbox']:checked ~ #gromov2016wearable-bibtex {
+	    display: block;
+	}
+
+	input[type='checkbox'] ~ #gromov2016wearable-bibtex, #gromov2016wearable-show {
+	    display: none;
+	}
+</style>
+
+<span id="gromov2016wearable"><b>B. Gromov</b>, L. M. Gambardella, and G. A. Di Caro, “Wearable multi-modal interface for human multi-robot interaction,” in <i>Safety, Security, and Rescue Robotics (SSRR), 2016 IEEE International Symposium on</i>, 2016, pp. 240–245.</span>
+
+
+<div class="csl-pdf"><a href="/~gromov/repository/gromov2016wearable.pdf" onclick="ga('gtag_UA_107954235_1.send', {hitType: 'pageview', page: '/~gromov/repository/gromov2016wearable.pdf'});">PDF</a></div>
+
+
+
+<div class="csl-video"><a href="https://youtu.be/FWMCxARQYhY" onclick="outbound_link('https://youtu.be/FWMCxARQYhY'); return false;">VIDEO</a></div>
+
+
+
+
+
+
+
+<div class="csl-doi"><a href="https://doi.org/10.1109/SSRR.2016.7784305" onclick="outbound_link('https://doi.org/10.1109/SSRR.2016.7784305'); return false;">DOI</a></div>
+
+
+
+
+<input type="checkbox" id="gromov2016wearable-show" />
+<div class="csl-bibtex">
+	<label class="csl-label" for="gromov2016wearable-show"><span class="csl-label">BIBTEX</span></label>
+</div>
+
+
+
+
+<div id="gromov2016wearable-bibtex">
+	<p></p>
+	<pre>@inproceedings{gromov2016wearable,
+  title = {Wearable multi-modal interface for human multi-robot interaction},
+  author = {Gromov, Boris and Gambardella, Luca M and Di Caro, Gianni A},
+  booktitle = {Safety, Security, and Rescue Robotics (SSRR), 2016 IEEE International Symposium on},
+  pages = {240--245},
+  year = {2016},
+  organization = {IEEE},
+  doi = {10.1109/SSRR.2016.7784305},
+  video = {https://youtu.be/FWMCxARQYhY}
+}
+</pre>
+</div>
+</li></ol>
+
+<hr />
+
+<!-- <div class="center">
+  <small>(c) Boris Gromov, 2015 &ndash; 2019</small>
+</div> -->
+
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
