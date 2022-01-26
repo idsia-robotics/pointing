@@ -2,8 +2,6 @@
 
 ## Publications
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FWMCxARQYhY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 ### Wearable multi-modal interface for human multi-robot interaction
 
  B. Gromov, L. M. Gambardella, and G. A. Di Caro
@@ -24,6 +22,8 @@ based on a number of different useful interaction patterns.
 </details>
 
 [PDF](/files/gromov2016wearable.pdf) [Video](https://youtu.be/FWMCxARQYhY)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FWMCxARQYhY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Learning to detect pointing gestures from wearable IMUs
 
@@ -57,7 +57,10 @@ traditional joystick interface.
 </details>
 
 [PDF](/files/gromov2018video.pdf) [Video](https://www.youtube.com/watch?v=jpG8Jsmth2Y&ab_channel=BorisGromov)
-details: hri-landing/index.html
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jpG8Jsmth2Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+details: [hri-landing/index.html](/hri-landing/index.html)
 
 ### Robot Identification and Localization with Pointing Gestures
 
@@ -85,6 +88,8 @@ real-world robots.
 
 [PDF](/files/gromov2018robot.pdf) [Video](https://www.youtube.com/watch?v=VaQ3aZBf_uE&ab_channel=BorisGromov)
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VaQ3aZBf_uE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 details: motion-relloc/index.html
 
 ### Demo: Pointing Gestures for Proximity Interaction
@@ -98,6 +103,8 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
 
 [PDF](/files/gromov2019demo.pdf) [Video](https://youtu.be/yafy-HZMk_U)
 award img/gromov2019demo-award.jpg
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yafy-HZMk_U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <!-- ### Video: Pointing Gestures for Proximity Interaction
 
@@ -133,6 +140,7 @@ a whole.
 </details>
 
 [PDF](/files/gromov2019proximity.pdf) [Video](https://youtu.be/hyh_5A4RXZY)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hyh_5A4RXZY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ### Guiding Quadrotor Landing with Pointing Gestures
 
@@ -171,6 +179,8 @@ control.
 </details>
 
 [PDF](/files/gromov2020intuitive.pdf) [Video](https://youtu.be/9PeCe9AVh-4)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9PeCe9AVh-4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 details: 3d-pointing/index.html
 
 ### Pointing at Moving Robots: Detecting Events from Wrist IMU Data
@@ -184,6 +194,8 @@ _in 2021 IEEE International Conference on Robotics and Automation (ICRA), pp. 36
 </details>
 
 [PDF](abbate2021moving.pdf) [Video](https://www.youtube.com/watch?v=x7Xt7Xr7pWk&ab_channel=BorisGromov)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x7Xt7Xr7pWk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ### IMU-based pointing for package selection on industrial conveyor belts
 
@@ -198,6 +210,10 @@ https://github.com/idsia-robotics/pointing-belts
 https://www.youtube.com/watch?v=hB33cX6pvmg&ab_channel=GabrieleAbbate
 
 https://www.youtube.com/watch?v=3J1HDkwa8qU&ab_channel=GabrieleAbbate
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/hB33cX6pvmg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3J1HDkwa8qU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 
 ### PointIt -> HRI short contrib
 
