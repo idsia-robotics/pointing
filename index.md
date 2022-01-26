@@ -8,12 +8,16 @@
   <summary>Abstract</summary>
 </details>
 
+---
+
 ### PointIt -> HRI short contrib
 
 https://github.com/Gabry993/pointing-user-interface-hri
 <details>
   <summary>Abstract</summary>
 </details>
+
+---
 
 ### IMU-based pointing for package selection on industrial conveyor belts
 
@@ -26,13 +30,11 @@ We introduce an intuitive pointing-based interface to select objects moving on a
 
 https://github.com/idsia-robotics/pointing-belts
 
-https://www.youtube.com/watch?v=hB33cX6pvmg&ab_channel=GabrieleAbbate
-
-https://www.youtube.com/watch?v=3J1HDkwa8qU&ab_channel=GabrieleAbbate
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hB33cX6pvmg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3J1HDkwa8qU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+---
 
 ### Pointing at Moving Robots: Detecting Events from Wrist IMU Data
 
@@ -44,9 +46,12 @@ _in 2021 IEEE International Conference on Robotics and Automation (ICRA), pp. 36
  We propose a practical approach for detecting the event that a human wearing an IMU-equipped bracelet points at a moving robot; the approach uses a learned classifier to verify if the robot motion (as measured by its odometry) matches the wrist motion, and does not require that the relative pose of the operator and robot is known in advance. To train the model and validate the system, we collect datasets containing hundreds of real-world pointing events. Extensive experiments quantify the performance of the classifiers and relevant metrics of the resulting detectors; the approach is implemented in a real-world demonstrator that allows users to land quadrotors by pointing at them.
 </details>
 
-[PDF](abbate2021moving.pdf) [Video](https://www.youtube.com/watch?v=x7Xt7Xr7pWk&ab_channel=BorisGromov)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/abbate2021moving.pdf)
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x7Xt7Xr7pWk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+
+---
 
 ### Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures
 
@@ -66,10 +71,14 @@ subjects show that the approach performs well on a challenging
 control.
 </details>
 
-[PDF](/files/gromov2020intuitive.pdf) [Video](https://youtu.be/9PeCe9AVh-4)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2020intuitive.pdf)
+
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/9PeCe9AVh-4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-details: 3d-pointing/index.html
+[Details](/3d-pointing/index.html)
+
+---
 
 ### Guiding Quadrotor Landing with Pointing Gestures
 
@@ -87,7 +96,9 @@ our approach compares well with a standard joystick-based controller in
 terms of intuitiveness (amount of training required), landing spot accuracy, and efficiency
 </details>
 
-[PDF](/files/gromov2020guiding.pdf)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2020guiding.pdf)
+
+---
 
 ### Proximity Human-Robot Interaction Using Pointing Gestures and a Wrist-mounted IMU
 
@@ -112,7 +123,8 @@ users, validating the individual components and the system as
 a whole.
 </details>
 
-[PDF](/files/gromov2019proximity.pdf) [Video](https://youtu.be/hyh_5A4RXZY)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2019proximity.pdf)
+
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hyh_5A4RXZY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 <!-- ### Video: Pointing Gestures for Proximity Interaction
@@ -123,7 +135,9 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
   <summary>Abstract</summary>
 </details>
 https://youtu.be/yafy-HZMk_U -->
-details: pointing-gestures/index.html
+[Details](/pointing-gestures/index.html)
+
+---
 
 ### Demo: Pointing Gestures for Proximity Interaction
 
@@ -134,10 +148,13 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
  We demonstrate a system to control robots in the users proximity with pointing gestures-a natural device that people use all the time to communicate with each other. Our setup consists of a miniature quadrotor Crazyflie 2.0, a wearable inertial measurement unit MetaWearR+ mounted on the user's wrist, and a laptop as the ground control station.
 </details>
 
-[PDF](/files/gromov2019demo.pdf) [Video](https://youtu.be/yafy-HZMk_U)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2019demo.pdf)
+
 award img/gromov2019demo-award.jpg
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yafy-HZMk_U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+---
 
 ### Robot Identification and Localization with Pointing Gestures
 
@@ -163,11 +180,13 @@ We experimentally show the feasibility of our approach using
 real-world robots.
 </details>
 
-[PDF](/files/gromov2018robot.pdf) [Video](https://www.youtube.com/watch?v=VaQ3aZBf_uE&ab_channel=BorisGromov)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2018robot.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/VaQ3aZBf_uE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-details: motion-relloc/index.html
+[Details](/motion-relloc/index.html)
+
+---
 
 ### Video: Landing a Drone with Pointing Gestures
 
@@ -183,11 +202,14 @@ on 5 subjects shows that the system compares favorably with a
 traditional joystick interface.
 </details>
 
-[PDF](/files/gromov2018video.pdf) [Video](https://www.youtube.com/watch?v=jpG8Jsmth2Y&ab_channel=BorisGromov)
+
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2018video.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jpG8Jsmth2Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-details: [hri-landing/index.html](/hri-landing/index.html)
+[Details](/hri-landing/index.html)
+
+---
 
 ### Learning to detect pointing gestures from wearable IMUs
 
@@ -204,7 +226,9 @@ and discuss an application to a human-robot interaction task
 where pointing gestures are used to guide a quadrotor landing
 </details>
 
-[PDF](/files/broggini2018learning.pdf)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/broggini2018learning.pdf)
+
+---
 
 ### Wearable multi-modal interface for human multi-robot interaction
 
@@ -225,7 +249,7 @@ The system has been tested with different robotic platforms
 based on a number of different useful interaction patterns.
 </details>
 
-[PDF](/files/gromov2016wearable.pdf) [Video](https://youtu.be/FWMCxARQYhY)
+[![PDF](/icons/pdf1.png "Download Paper")](/files/gromov2016wearable.pdf)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FWMCxARQYhY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
