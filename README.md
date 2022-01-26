@@ -1,5 +1,5 @@
 # Pointing
-
+{% include youtubePlayer.html id=FWMCxARQYhY %}
 ## Publications
 
 ### Wearable multi-modal interface for human multi-robot interaction
