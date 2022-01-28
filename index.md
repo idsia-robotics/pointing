@@ -75,7 +75,7 @@ _in 2021 IEEE International Conference on Robotics and Automation (ICRA), pp. 36
 ### Intuitive 3D Control of a Quadrotor in User Proximity with Pointing Gestures
 
 B. Gromov, J. Guzzi, L. Gambardella, and A. Giusti
-_in 2020 IEEE International Conference on Robotics and Automation (ICRA), 2020, to appear_
+_in 2020 IEEE International Conference on Robotics and Automation (ICRA), 2020, pp. 5964-5971_
 
 <details>
   <summary>Abstract</summary>
@@ -169,7 +169,7 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
 
 [![PDF]({{ "/files/img/pdf1.png" | relative_url }} "Download Paper")]({{"/files/gromov2019demo.pdf"| relative_url }})
 
-award img/gromov2019demo-award.jpg
+<!-- award img/gromov2019demo-award.jpg -->
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/yafy-HZMk_U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
