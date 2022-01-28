@@ -2,20 +2,39 @@
 
 ## Publications
 
-### HRI Demo Jerome
+### Interacting with a Conveyor Belt in Virtual Reality using Pointing Gestures
+
+Jérôme Guzzi, Gabriele Abbate, Antonio Paolillo and Alessandro Giusti
+_HRI2022 Demo, to appear_
 
 <details>
   <summary>Abstract</summary>
+  We present an interactive demonstration where users are immersed in a virtual reality simulation of a logistic automation system. Using pointing gestures sensed by wrist-worn inertial measurement unit, users select defective packages transported on conveyor belts. The demonstration allows users to experience a novel way to interact with automation systems, and shows an effective application of virtual reality for human-robot interaction studies.
 </details>
+
+[![PDF]({{ "/files/img/pdf1.png" | relative_url }} "Download Paper")]({{"/files/guzzi2022demo.pdf"| relative_url }})
+
+<div class="video-container">
+        <video width="100%" controls>
+          <source src="files/videos/guzzi2022demo.mp4" type="video/mp4" />
+        </video>
+</div>
 
 ---
 
-### PointIt -> HRI short contrib
+### PointIt: A ROS Toolkit for Interacting with Co-located Robots using Pointing Gestures
 
-https://github.com/Gabry993/pointing-user-interface-hri
+Gabriele Abbate, Alessandro Giusti, Antonio Paolillo, Boris Gromov, Luca Gambardella, Andrea Emilio Rizzoli and Jérôme Guzzi
+_HRI2022 Short Contribution, to appear_
+
 <details>
   <summary>Abstract</summary>
+  We introduce PointIt, a toolkit for the Robot Operating System (ROS2) to build human-robot interfaces based on pointing gestures sensed by a wrist-worn Inertial Measurement Unit, such as a smartwatch.  We release the software as open-source with MIT license; docker images and exhaustive instructions simplify its usage in simulated and real-world deployments.
 </details>
+
+[![PDF]({{ "/files/img/pdf1.png" | relative_url }} "Download Paper")]({{"/files/abbate2022short.pdf"| relative_url }})
+
+[Details](https://github.com/Gabry993/pointing-user-interface-hri)
 
 ---
 
@@ -28,7 +47,7 @@ Gabriele Abbate, Alessandro Giusti, Antonio Paolillo, Luca Maria Gambardella, An
 We introduce an intuitive pointing-based interface to select objects moving on a system of conveyor belts. The interface has minimal sensing requirements, as the operator only needs to wear an Inertial Measurement Unit on the wrist (e.g., a smartwatch). LED strips provide the required visual feedback to precisely point to the objects and select them. We experimentally compare the proposed approach with a baseline mouse-based graphical user interface in which the user can click on packages with a mouse. Quantitative results show that our interface compares favorably to the baseline, especially in difficult scenarios involving many packages moving fast.
 </details>
 
-https://github.com/idsia-robotics/pointing-belts
+[Details](https://github.com/idsia-robotics/pointing-belts)
 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/hB33cX6pvmg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
