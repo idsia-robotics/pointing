@@ -423,7 +423,7 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
   <label class="csl-label" for="gromov2019demo-show"><span class="csl-label">BIBTEX</span></label>
 </div>
 <div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673020" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673020'); return false;">DOI</a></div>
-<div class="csl-award"><a href="{{'/pointing-gestures/gromov2019video-award.jpg'| relative_url }}">VIDEO AWARD</a></div>
+<div class="csl-award"><a href="{{'/pointing-gestures/gromov2019video-award.jpg'| relative_url }}">AWARD</a></div>
 <div class="csl-details"><a href="{{'/pointing-gestures/index.html'| relative_url }}">DETAILS</a></div>
 <div id="gromov2019demo-bibtex">
   <p></p>
@@ -474,7 +474,7 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
   <label class="csl-label" for="gromov2019demo-show"><span class="csl-label">BIBTEX</span></label>
 </div>
 <div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673329" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673329'); return false;">DOI</a></div>
-<div class="csl-award"><a href="{{'/pointing-gestures/gromov2019demo-award.jpg'| relative_url }}">DEMO AWARD</a></div>
+<div class="csl-award"><a href="{{'/pointing-gestures/gromov2019demo-award.jpg'| relative_url }}">AWARD</a></div>
 <div id="gromov2019demo-bibtex">
   <p></p>
   <pre>@inproceedings{gromov2019demo,
