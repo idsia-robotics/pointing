@@ -39,7 +39,19 @@ header:
 
 Humans use pointing gestures extensively when they communicate with other nearby humans, mainly to indicate positions, directions or objects in the shared space.  This page summarizes recent research at IDSIA, exploring methods to achieve the same interaction modality using a wearable bracelet as a sensor; the method is applied to various robot systems, including drones and large conveyor-belt plants used for logistics.
 </div>
+  
 <div markdown="1">
+
+# Interacting with a simulated RoboMaster
+
+The video shows preliminary results on pointing-based interaction for collaborative pick&place using two simulated DJI RoboMasters: one robot moves objects on command, the other robot provides visual feedback projecting lights where the user is pointing. The video is speeded up 8 times.
+</div>
+<div class="video-container">
+        <video width="100%" controls>
+          <source src="files/videos/rm_ep_s1_interaction_30_8x.mp4" type="video/mp4" />
+        </video>
+</div>
+
 
 # Publications
 
