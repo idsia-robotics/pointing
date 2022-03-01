@@ -52,7 +52,8 @@ The video shows preliminary results on pointing-based interaction for collaborat
         </video>
 </div>
 
-
+<div markdown="1">
+  
 # Publications
 
 ## Interacting with a Conveyor Belt in Virtual Reality using Pointing Gestures
