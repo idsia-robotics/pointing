@@ -454,14 +454,14 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
   }
 </style>
 
-<input type="checkbox" id="gromov2019demo-show" />
+<input type="checkbox" id="gromov2019video-show" />
 <div class="csl-bibtex">
-  <label class="csl-label" for="gromov2019demo-show"><span class="csl-label">BIBTEX</span></label>
+  <label class="csl-label" for="gromov2019video-show"><span class="csl-label">BIBTEX</span></label>
 </div>
 <div class="csl-doi"><a href="https://doi.org/10.1109/HRI.2019.8673020" onclick="outbound_link('https://doi.org/10.1109/HRI.2019.8673020'); return false;">DOI</a></div>
 <div class="csl-award"><a href="{{'/pointing-gestures/gromov2019video-award.jpg'| relative_url }}">AWARD</a></div>
 <div class="csl-details"><a href="{{'/pointing-gestures/index.html'| relative_url }}">DETAILS</a></div>
-<div id="gromov2019demo-bibtex">
+<div id="gromov2019video-bibtex">
   <p></p>
   <pre>@inproceedings{gromov2019video,
   author = {Gromov, Boris and Guzzi, J{\'e}r{\^o}me and Abbate, Gabriele and Gambardella, Luca and Giusti, Alessandro},
