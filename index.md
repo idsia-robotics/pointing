@@ -445,11 +445,11 @@ _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction
 <div class="csl-pdf"><a href="{{'/files/gromov2019demo.pdf'| relative_url }}">PDF</a></div>
 
 <style type="text/css">
-  input[type='checkbox']:checked ~ #gromov2019demo-bibtex {
+  input[type='checkbox']:checked ~ #gromov2019video-bibtex {
       display: block;
   }
 
-  input[type='checkbox'] ~ #gromov2019demo-bibtex, #gromov2019demo-show {
+  input[type='checkbox'] ~ #gromov2019video-bibtex, #gromov2019video-show {
       display: none;
   }
 </style>
