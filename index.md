@@ -442,7 +442,7 @@ B. Gromov, J. Guzzi, G. Abbate, L. Gambardella, and A. Giusti<br/>
 _in HRI ’19: 2019 ACM/IEEE International Conference on Human-Robot Interaction, March 11–14, 2019, Daegu, Rep. of Korea, 2019_
 </div>
 <div>
-<div class="csl-pdf"><a href="{{'/files/gromov2019demo.pdf'| relative_url }}">PDF</a></div>
+<div class="csl-pdf"><a href="{{'/files/gromov2019video.pdf'| relative_url }}">PDF</a></div>
 
 <style type="text/css">
   input[type='checkbox']:checked ~ #gromov2019video-bibtex {
