@@ -59,7 +59,7 @@ The video shows preliminary results on pointing-based interaction for collaborat
 ## Interacting with a Conveyor Belt in Virtual Reality using Pointing Gestures
 
 J. Guzzi, G. Abbate, A. Paolillo, and A. Giusti<br/>
-_HRI2022 Demo, to appear_
+_in Proceedings of the 2022 ACM/IEEE International Conference on Human-Robot Interaction, pp. 1194–1195, 2022_
 </div>
 <div>
 <div class="csl-pdf"><a href="{{'/files/guzzi2022demo.pdf'| relative_url }}">PDF</a></div>
@@ -78,10 +78,22 @@ _HRI2022 Demo, to appear_
 <div class="csl-bibtex">
   <label class="csl-label" for="guzzi2022demo-show"><span class="csl-label">BIBTEX</span></label>
 </div>
-
+<div class="csl-doi"><a href="https://dl.acm.org/doi/10.5555/3523760.3523971" onclick="outbound_link('https://dl.acm.org/doi/10.5555/3523760.3523971'); return false;">DOI</a></div>
 <div id="guzzi2022demo-bibtex">
   <p></p>
-  <pre>
+  <pre>@inproceedings{10.5555/3523760.3523971,
+author = {Guzzi, J\'{e}r\^{o}me and Abbate, Gabriele and Paolillo, Antonio and Giusti, Alessandro},
+title = {Interacting with a Conveyor Belt in Virtual Reality Using Pointing Gestures},
+year = {2022},
+publisher = {IEEE Press},
+abstract = {We present an interactive demonstration where users are immersed in a virtual reality simulation of a logistic automation system. Using pointing gestures sensed by wrist-worn inertial measurement unit, users select defective packages transported on conveyor belts. The demonstration allows users to experience a novel way to interact with automation systems, and shows an effective application of virtual reality for human-robot interaction studies.},
+booktitle = {Proceedings of the 2022 ACM/IEEE International Conference on Human-Robot Interaction},
+pages = {1194–1195},
+numpages = {2},
+keywords = {pointing, human-machine interaction, virtual reality, conveyor system},
+location = {Sapporo, Hokkaido, Japan},
+series = {HRI '22}
+}
 </pre>
 </div>
 
@@ -103,7 +115,7 @@ _HRI2022 Demo, to appear_
 ## PointIt: A ROS Toolkit for Interacting with Co-located Robots using Pointing Gestures
 
 G. Abbate, A. Giusti, A. Paolillo, B. Gromov, L. Gambardella, A. Rizzoli, and J. Guzzi<br/>
-_HRI2022 Short Contribution, to appear_
+_in Proceedings of the 2022 ACM/IEEE International Conference on Human-Robot Interaction, pp. 608–612, 2022_
 </div>
 <div>
 <div class="csl-pdf"><a href="{{'/files/abbate2022short.pdf'| relative_url }}">PDF</a></div>
@@ -122,13 +134,24 @@ _HRI2022 Short Contribution, to appear_
 <div class="csl-bibtex">
   <label class="csl-label" for="abbate2022short-show"><span class="csl-label">BIBTEX</span></label>
 </div>
-
-
+<div class="csl-doi"><a href="https://dl.acm.org/doi/10.5555/3523760.3523840" onclick="outbound_link('https://dl.acm.org/doi/10.5555/3523760.3523840'); return false;">DOI</a></div>
 <div class="csl-details"><a href="https://github.com/Gabry993/pointing-user-interface-hri">DETAILS</a></div>
 
 <div id="abbate2022short-bibtex">
   <p></p>
-  <pre>
+  <pre>@inproceedings{10.5555/3523760.3523840,
+author = {Abbate, Gabriele and Giusti, Alessandro and Paolillo, Antonio and Gromov, Boris and Gambardella, Luca and Rizzoli, Andrea-Emilio and Guzzi, J\'{e}r\^{o}me},
+title = {PointIt: A ROS Toolkit for Interacting with Co-Located Robots Using Pointing Gestures},
+year = {2022},
+publisher = {IEEE Press},
+abstract = {We introduce PointIt, a toolkit for the Robot Operating System (ROS2) to build human-robot interfaces based on pointing gestures sensed by a wrist-worn Inertial Measurement Unit, such as a smartwatch. We release the software as open-source with MIT license; docker images and exhaustive instructions simplify its usage in simulated and real-world deployments.},
+booktitle = {Proceedings of the 2022 ACM/IEEE International Conference on Human-Robot Interaction},
+pages = {608–612},
+numpages = {5},
+keywords = {pointing gesture, ros, human robot interaction, ambient intelligence},
+location = {Sapporo, Hokkaido, Japan},
+series = {HRI '22}
+}
 </pre>
 </div>
 
