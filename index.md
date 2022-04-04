@@ -201,7 +201,7 @@ G. Abbate, A. Giusti, A. Paolillo, L. Gambardella, A. Rizzoli, and J. Guzzi
   We introduce an intuitive pointing-based interface to select objects moving on a system of conveyor belts. The interface has minimal sensing requirements, as the operator only needs to wear an Inertial Measurement Unit on the wrist (e.g., a smartwatch). LED strips provide the required visual feedback to precisely point to the objects and select them. We experimentally compare the proposed approach with a baseline mouse-based graphical user interface in which the user can click on packages with a mouse. Quantitative results show that our interface compares favorably to the baseline, especially in difficult scenarios involving many packages moving fast.</p>
 </details>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hB33cX6pvmg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=fEnPEXPlVIM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3J1HDkwa8qU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
